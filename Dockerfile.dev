@@ -1,0 +1,20 @@
+# === Разработка: hot reload с bootRun ===
+FROM eclipse-temurin:25-jdk-alpine
+WORKDIR /build
+
+# Копируем Gradle
+COPY gradlew .
+COPY gradle ./gradle
+COPY *.gradle.kts ./
+
+RUN chmod +x ./gradlew
+
+# Кэшируем зависимости
+RUN ./gradlew dependencies --no-daemon || true
+
+# Код монтируется через volume
+# COPY src ./src  ← НЕ НАДО! Монтируем в compose
+
+EXPOSE 8081
+
+CMD ["./gradlew", "bootRun", "--no-daemon", "-Dspring.profiles.active=dev"]
