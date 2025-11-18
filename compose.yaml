@@ -1,0 +1,47 @@
+services:
+
+  db:
+    image: postgres:16
+    container_name: washing-db
+    environment:
+      POSTGRES_DB: washing_database
+      POSTGRES_USER: washing_admin
+      POSTGRES_PASSWORD: washing_admin
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U washing_admin -d washing_database" ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: always
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev  # ← для разработки
+      # dockerfile: Dockerfile
+    container_name: washing-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/washing_database
+      SPRING_DATASOURCE_USERNAME: washing_admin
+      SPRING_DATASOURCE_PASSWORD: washing_admin
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_LIQUIBASE_ENABLED: true
+      SPRING_PROFILES_ACTIVE: dev
+    ports:
+      - "8082:8081"
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: always
+    volumes:
+      - ./src:/build/src:cached  # ← Hot reload!
+      - gradle_cache:/root/.gradle  # ← Кэш Gradle
+
+volumes:
+  db_data:
+  gradle_cache:

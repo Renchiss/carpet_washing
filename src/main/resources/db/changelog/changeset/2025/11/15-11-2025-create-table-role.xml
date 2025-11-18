@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="15-11-2025-create-table-role" author="rrishbuldin">
+        <createTable ifNotExists="true" tableName="role">
+            <column name="id" type="bigserial" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="object_id" type="uuid" defaultValueComputed="gen_random_uuid()">
+                <constraints unique="true" nullable="false"/>
+            </column>
+            <column name="version" type="bigint" defaultValueNumeric="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="description" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="timestamp" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <insert tableName="role">
+            <column name="name" value="ROLE_USER"/>
+            <column name="description" value="Обычный пользователь. Возможности: просматривать свои заказы на стирку; смотреть примерную стоимость; задавать вопросы"/>
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="ROLE_ADMIN"/>
+            <column name="description" value="Администратор. Возможности: видит все заказы; управляет заказами; управляет пользователями"/>
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="ROLE_COURIER"/>
+            <column name="description" value="Курьер. Возможности: видит заказы, которые нужно забрать; добавляет информацию к этим заказам(может редактировать их в течении двух дней)"/>
+        </insert>
+        <insert tableName="role">
+            <column name="name" value="ROLE_WASHER"/>
+            <column name="description" value="Ковромойщик. Возможности: видит список заказов, актуальных на сегодняшний день(нужно стирать); добавляет информацию к заказам(размеры ковров)"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

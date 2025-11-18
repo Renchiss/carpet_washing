@@ -1,0 +1,10 @@
+build/
+*.log
+.gradle/
+.gradle
+.gradletasknamecache
+*.iml
+.idea/
+local.properties
+README.md
+Dockerfile

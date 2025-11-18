@@ -1,0 +1,42 @@
+server:
+  port: 8081
+
+spring:
+  datasource:
+    url: jdbc:postgresql://db:5432/washing_database
+    username: washing_admin
+    password: washing_admin
+    driver-class-name: org.postgresql.Driver
+
+  devtools:
+    restart:
+      enabled: false
+    livereload:
+      enabled: false
+
+  docker:
+    compose:
+      enabled: false
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+  liquibase:
+    enabled: true
+    change-log: classpath:db/changelog/changelog.xml
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,env  # ← ВКЛЮЧАЕМ Actuator
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    root: INFO
+    ru.rrishbuldin.carpet_washing: DEBUG
