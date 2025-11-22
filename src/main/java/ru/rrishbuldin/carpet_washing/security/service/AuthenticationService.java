@@ -6,9 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.rrishbuldin.carpet_washing.dto.auth.LoginRequestDto;
-import ru.rrishbuldin.carpet_washing.dto.auth.RegisterRequestDto;
-import ru.rrishbuldin.carpet_washing.dto.user.UserDto;
+import ru.rrishbuldin.carpet_washing.security.dto.auth.LoginRequestDto;
+import ru.rrishbuldin.carpet_washing.security.dto.auth.RegisterRequestDto;
+import ru.rrishbuldin.carpet_washing.modules.user.dto.UserDto;
 import ru.rrishbuldin.carpet_washing.exception.RegistrationException;
 import ru.rrishbuldin.carpet_washing.exception.UserInteractionException;
 import ru.rrishbuldin.carpet_washing.security.jwt.JwtUtil;

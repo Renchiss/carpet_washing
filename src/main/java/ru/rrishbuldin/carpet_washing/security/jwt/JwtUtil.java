@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import ru.rrishbuldin.carpet_washing.entity.User;
+import ru.rrishbuldin.carpet_washing.modules.user.entity.User;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;

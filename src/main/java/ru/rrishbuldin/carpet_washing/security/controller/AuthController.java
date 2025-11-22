@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.rrishbuldin.carpet_washing.dto.auth.LoginRequestDto;
-import ru.rrishbuldin.carpet_washing.dto.auth.LoginResponseDto;
-import ru.rrishbuldin.carpet_washing.dto.auth.RegisterRequestDto;
-import ru.rrishbuldin.carpet_washing.dto.user.UserDto;
+import ru.rrishbuldin.carpet_washing.security.dto.auth.LoginRequestDto;
+import ru.rrishbuldin.carpet_washing.security.dto.auth.LoginResponseDto;
+import ru.rrishbuldin.carpet_washing.security.dto.auth.RegisterRequestDto;
+import ru.rrishbuldin.carpet_washing.modules.user.dto.UserDto;
 import ru.rrishbuldin.carpet_washing.security.service.AuthenticationService;
 
 @RestController
